@@ -24,7 +24,7 @@ function formatCurrency(value: number): string {
 function daysInclusive(start: Date | null, end: Date | null): number {
   if (!start || !end || end < start) return 0;
   const msPerDay = 24 * 60 * 60 * 1000;
-  return Math.floor((end - start) / msPerDay) + 1;
+  return Math.floor((end.getTime() - start.getTime()) / msPerDay) + 1;
 }
 
 function getOverlapDays(
@@ -99,12 +99,12 @@ const [billType, setBillType] = useState("");
     setRooms([...rooms, { id: crypto.randomUUID(), name: `${nextLetter}房`, moveIn: "", moveOut: "" }]);
   };
 
-  const removeRoom = (id) => {
+  const removeRoom = (id: string) => {
     if (rooms.length <= 1) return;
     setRooms(rooms.filter((room) => room.id !== id));
   };
 
-  const updateRoom = (id, key, value) => {
+  const updateRoom = (id: string, key: string, value: string) => {
     setRooms(rooms.map((room) => (room.id === id ? { ...room, [key]: value } : room)));
   };
 
