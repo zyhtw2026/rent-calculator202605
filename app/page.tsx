@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Plus, Trash2, Calculator, Home, ReceiptText } from "lucide-react";
 
-function parseDate(value) {
+function parseDate(value: string): Date | null {
   if (!value) return null;
   const date = new Date(`${value}T00:00:00`);
   return Number.isNaN(date.getTime()) ? null : date;
@@ -21,13 +21,18 @@ function formatCurrency(value) {
   }).format(value);
 }
 
-function daysInclusive(start, end) {
+function daysInclusive(start: Date | null, end: Date | null): number {
   if (!start || !end || end < start) return 0;
   const msPerDay = 24 * 60 * 60 * 1000;
   return Math.floor((end - start) / msPerDay) + 1;
 }
 
-function getOverlapDays(billStart, billEnd, moveIn, moveOut) {
+function getOverlapDays(
+  billStart: Date | null,
+  billEnd: Date | null,
+  moveIn: Date | null,
+  moveOut: Date | null
+): number {
   if (!billStart || !billEnd || !moveIn) return 0;
   const actualStart = moveIn > billStart ? moveIn : billStart;
   const actualEnd = moveOut && moveOut < billEnd ? moveOut : billEnd;
