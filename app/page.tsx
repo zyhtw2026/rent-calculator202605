@@ -12,7 +12,7 @@ function parseDate(value: string): Date | null {
   return Number.isNaN(date.getTime()) ? null : date;
 }
 
-function formatCurrency(value) {
+function formatCurrency(value: number): string {
   if (!Number.isFinite(value)) return "NT$0";
   return new Intl.NumberFormat("zh-TW", {
     style: "currency",
