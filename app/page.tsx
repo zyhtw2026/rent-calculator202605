@@ -185,7 +185,7 @@ const [billType, setBillType] = useState("");
               </div>
               <div className="space-y-2">
                 <Label>帳單迄日</Label>
-                <Input type="date" value={billEnd} onChange={(e) => setBillEnd(e.target.value)} max={today} />
+                <Input type="date" value={billEnd} onChange={(e) => setBillEnd(e.target.value)} />
               </div>
             </div>
 
